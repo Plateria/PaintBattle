@@ -21,6 +21,7 @@ public class PaintBattle {
 
     public static void createAndShowGui(int h, int w) {
         JFrame frame = new JFrame("Paint Battle 2.0");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(w, h);
         JPanel container = new JPanel();
         container.setLayout(new BorderLayout());
