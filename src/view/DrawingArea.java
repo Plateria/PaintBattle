@@ -6,6 +6,7 @@ import model.PaintBattle;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
 public class DrawingArea extends JPanel implements MouseListenerInterface {
@@ -16,6 +17,8 @@ public class DrawingArea extends JPanel implements MouseListenerInterface {
     private static ArrayList<Point> painted;
     private static MarcelMouseListener mouseListener;
     public static int counter = 0;
+    public static Color drawingColor = Color.black;
+    int k = 2;
 
     public DrawingArea() {
         painted = new ArrayList<>();
@@ -29,6 +32,10 @@ public class DrawingArea extends JPanel implements MouseListenerInterface {
     }
 
     @Override
+    public void setColor(Color color) {
+        drawingColor = color;
+    }
+    @Override
     public Dimension getPreferredSize() {
         // TODO Auto-generated method stub
         return super.getPreferredSize();
@@ -37,8 +44,7 @@ public class DrawingArea extends JPanel implements MouseListenerInterface {
     public void paint(double x, double y) {
         addPainted(new Point((int) x, (int) y));
         this.setBackground(Color.red);
-        this.repaint();
-
+        repaint();
     }
 
     @Override
@@ -46,8 +52,11 @@ public class DrawingArea extends JPanel implements MouseListenerInterface {
         for (int i = 0; i < allPoints.size() - 1; i++) {
             Point p1 = allPoints.get(i);
             Point p2 = allPoints.get(i + 1);
-
-            this.getGraphics().drawLine((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y);
+            Graphics2D g2 = (Graphics2D) getGraphics();
+            g2.setStroke(new BasicStroke(10));  //Set thickness
+            g2.setColor(drawingColor);
+            g2.draw(new Line2D.Float((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y));
+            //getGraphics().drawLine((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y);
         }
     }
 

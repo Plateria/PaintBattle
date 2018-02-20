@@ -8,5 +8,6 @@ import java.util.ArrayList;
 public interface MouseListenerInterface {
 
     void repaint(ArrayList<Point> allPoints);
+    void setColor(Color drawingColor);
 
 }
